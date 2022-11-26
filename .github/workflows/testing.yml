@@ -21,7 +21,8 @@ jobs:
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
           workflow_file_name: testing.yml
           ref: master
-          entryPoint: deploytest
+          event_type: deploytest
+          client_payload: '{"git-ref": "${{ github.event.inputs.git-ref }}"}'
       - name: Deploy Web App
         run: |
           echo "Deploy Web App"
