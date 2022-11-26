@@ -9,7 +9,7 @@ jobs:
     name: Run Web App
     runs-on: ubuntu-latest
     steps:
-      - name: Build Web App
+      - name: Build Web App 
         run: |
           echo "Build Web App test"
           sleep 10s
