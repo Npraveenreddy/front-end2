@@ -21,7 +21,7 @@ jobs:
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
           workflow_file_name: testing.yml
           ref: master
-          stage: deploytest
+          entryPoint: deploytest
       - name: Deploy Web App
         run: |
           echo "Deploy Web App"
