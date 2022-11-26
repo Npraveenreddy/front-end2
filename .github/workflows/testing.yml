@@ -6,11 +6,33 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  build:
-    name: Run Web App
+  paths-filter:
     runs-on: ubuntu-latest
-    container:
-      image: openjdk:8-jdk-slim
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          workflows:
+            - '.github/workflows/**'
+    # run only if 'workflows' files were changed
+    - name: workflow tests
+      if: steps.filter.outputs.workflows == 'true'
+      run: echo "Workflow file"
+
+    # run only if not 'workflows' files were changed
+    - name: not workflow tests
+      if: steps.filter.outputs.workflows != 'true'
+      run: echo "NOT workflow file"
+
+  next-job:
+    runs-on: ubuntu-latest
+    # Wait from the paths-filter to be completed before starting next-job
+    needs: paths-filter
+    if: needs.paths-filter.outputs.output1 == 'true'
     steps:
       - name: Build Web App 
         run: |
@@ -28,3 +50,28 @@ jobs:
         run: |
           echo "Deploy Web App"
           sleep 10s
+
+
+
+  # build:
+  #   name: Run Web App
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: openjdk:8-jdk-slim
+  #   steps:
+  #     - name: Build Web App 
+  #       run: |
+  #         echo "Build Web App test"
+  #         sleep 10s
+  #     - uses: convictional/trigger-workflow-and-wait@v1.3.0
+  #       with:
+  #         owner: Npraveenreddy
+  #         repo: back-end
+  #         if: (!($CI_COMMIT_MESSAGE =~ /^\[.github/workflows/testing.yml\].*/) || ${{ github.event_name }} == "push" && ${{ github.ref }} == "master")
+  #         github_token: ${{ secrets.G_ACCESS_TOKEN }}
+  #         workflow_file_name: testing.yml
+  #         ref: master
+  #     - name: Deploy Web App
+  #       run: |
+  #         echo "Deploy Web App"
+  #         sleep 10s
