@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jdk-slim
-    if: (!($CI_COMMIT_MESSAGE =~ /^\[.github/workflows/testing.yml\].*/) || ${{ github.event_name }} == "push" && ${{ github.ref }} == "master")
     steps:
       - name: Build Web App 
         run: |
@@ -21,6 +20,7 @@ jobs:
         with:
           owner: Npraveenreddy
           repo: back-end
+          if: (!($CI_COMMIT_MESSAGE =~ /^\[.github/workflows/testing.yml\].*/) || ${{ github.event_name }} == "push" && ${{ github.ref }} == "master")
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
           workflow_file_name: testing.yml
           ref: master
