@@ -6,25 +6,36 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  build:
-    name: Run Web App
+  trigger_downstream:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Web App 
-        run: |
-          echo "Build Web App test"
-          sleep 10s
-      - uses: adityakar/workflow-dispatcher@v1.0
-      # - uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: Npraveenreddy
-          repo: back-end
-          github_token: ${{ secrets.G_ACCESS_TOKEN }}
-          workflow_file_name: testing.yml
-          ref: master
-          event_type: deploytest
-          client_payload: '{"git-ref": "${{ github.event.inputs.git-ref }}"}'
-      - name: Deploy Web App
-        run: |
-          echo "Deploy Web App"
-          sleep 10s
+    - name: Deploy Your Service
+      uses: adityakar/workflow-dispatcher@v1.0
+      with:
+        owner: Npraveenreddy
+        repo: back-end
+        token: ${{ secrets.G_ACCESS_TOKEN }}
+        event_type: deploytest
+        client_payload: '{"git-ref": "${{ github.event.inputs.git-ref }}"}'
+
+  # build:
+  #   name: Run Web App
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Build Web App 
+  #       run: |
+  #         echo "Build Web App test"
+  #         sleep 10s
+  #     - uses: convictional/trigger-workflow-and-wait@v1.3.0
+  #       with:
+  #         owner: Npraveenreddy
+  #         repo: back-end
+  #         github_token: ${{ secrets.G_ACCESS_TOKEN }}
+  #         workflow_file_name: testing.yml
+  #         ref: master
+  #         event_type: deploytest
+  #         client_payload: '{"git-ref": "${{ github.event.inputs.git-ref }}"}'
+  #     - name: Deploy Web App
+  #       run: |
+  #         echo "Deploy Web App"
+  #         sleep 10s
