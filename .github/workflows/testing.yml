@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 jobs:
   build:
-    name: Run Web App
+    name: Run Web App 
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jdk-slim
