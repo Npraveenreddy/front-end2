@@ -20,9 +20,6 @@ jobs:
         with:
           owner: Npraveenreddy
           repo: back-end
-          inputs: (github.ref == 'workflow_dispatch' || github.ref == 'refs/heads/master')
-          # if: (!($CI_COMMIT_MESSAGE =~ /^\[.github/workflows/testing.yml\].*/) || ${{ github.event_name }} == "push" && ${{ github.ref }} == "master")
-          github_token: ${{ secrets.G_ACCESS_TOKEN }}
           workflow_file_name: testing.yml
           ref: master
       - name: Deploy Web App
