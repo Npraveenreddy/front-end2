@@ -9,11 +9,12 @@ on:
     - cron: "*/5 * * * *"
 jobs:
   build:
+    if: ${{ github.event_name == 'schedule' }}
     name: Run Web App 
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'schedule' }}
     container:
       image: openjdk:8-jdk-slim
     steps:
+    
       - run: echo "hello"
 
