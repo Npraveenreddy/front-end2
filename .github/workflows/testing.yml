@@ -16,5 +16,6 @@ jobs:
     steps:
       - name: Echo
         if: ${{ github.event_name == 'push' && github.ref_name == 'master' && github.event_name == 'schedule' }} 
+        uses: actions/checkout@v1
       - run: echo "hello"
 
