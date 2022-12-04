@@ -15,7 +15,7 @@ jobs:
       image: openjdk:8-jdk-slim
     steps:
       - name: Echo
-        if: ${{ github.event_name == 'schedule' }} 
+        if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }} 
         uses: actions/checkout@v1
       - run: echo "hello"
       
@@ -36,7 +36,7 @@ jobs:
       image: openjdk:8-jdk-slim
     steps:
       - name: list all in the folder
-        if: ${{ github.event_name == 'schedule' }} 
+        if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }} 
         uses: actions/checkout@v1
       - run: |
           ls -lrt
