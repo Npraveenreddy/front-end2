@@ -15,16 +15,9 @@ jobs:
     container:
       image: openjdk:8-jdk-slim
     steps:
-      - name: Build Web App 
-      - uses: convictional/trigger-workflow-and-wait@v1.3.0
-        with:
-          owner: Npraveenreddy
-          repo: back-end
-          workflow_file_name: testing.yml
-          ref: master
+      - run: echo "hello"
   testing:
     needs: build
-    name: echo the word  
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jdk-slim
@@ -32,8 +25,7 @@ jobs:
       - run: |
           pwd
   calling:
-    needs: build
-    name: listing  
+    needs: build 
     runs-on: ubuntu-latest
     if: github.event.schedule = schedule
     container:
