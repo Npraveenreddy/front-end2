@@ -26,6 +26,7 @@ jobs:
       image: openjdk:8-jdk-slim
     steps:
       - name: path 
+        uses: actions/checkout@v1
       - run: pwd
       
   calling:
