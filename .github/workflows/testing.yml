@@ -11,7 +11,7 @@ jobs:
   build:
     name: Run Web App 
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
+    if: ${{ github.event_name == 'schedule' }}
     container:
       image: openjdk:8-jdk-slim
     steps:
@@ -27,7 +27,7 @@ jobs:
   calling:
     needs: build 
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
+    if: ${{ github.event_name == 'schedule' }}
     container:
       image: openjdk:8-jdk-slim
     steps:
