@@ -16,20 +16,4 @@ jobs:
       image: openjdk:8-jdk-slim
     steps:
       - run: echo "hello"
-  testing:
-    needs: build
-    runs-on: ubuntu-latest
-    container:
-      image: openjdk:8-jdk-slim
-    steps:
-      - run: |
-          pwd
-  calling:
-    needs: build 
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'schedule' }}
-    container:
-      image: openjdk:8-jdk-slim
-    steps:
-      - run: |
-          ls -lrt
+
