@@ -37,8 +37,8 @@ jobs:
 #     if: (github.event_name == 'workflow_dispatch')
     environment: test
 #     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.ref == 'refs/heads/master'}} 
-    container:
-      image: openjdk:8-jdk-slim
+#     container:
+#       image: openjdk:8-jdk-slim
     steps:
       - name: list all in the folder
         
