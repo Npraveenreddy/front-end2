@@ -11,7 +11,7 @@ jobs:
   build:
     name: Run Web App 
     runs-on: ubuntu-latest
-#     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }} 
+#     if: (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
     container:
       image: openjdk:8-jdk-slim
     steps:
@@ -34,7 +34,7 @@ jobs:
     
     needs: build 
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || githu.ref == 'refs/heads/master'}}
+    if: (github.event_name == 'workflow_dispatch' || githu.ref == 'refs/heads/master')
     environment: test
 #     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }} 
     container:
