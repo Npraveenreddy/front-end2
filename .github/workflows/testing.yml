@@ -31,9 +31,10 @@ jobs:
       - run: pwd
       
   calling:
+    environment: test
     needs: build 
     runs-on: ubuntu-latest
-    environment: test
+   
 #     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }} 
     container:
       image: openjdk:8-jdk-slim
