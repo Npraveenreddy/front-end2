@@ -1,10 +1,10 @@
 name: Deploy
-on:
-  workflow_dispatch:
+on: [push, pull_request]
+  
 #   push:
 #     branches: [ "master" ] 
-  pull_request:
-    branches: [ "master" ]   
+#   pull_request:
+#     branches: [ "master" ]   
   #schedule:
    # - cron: "*/5 * * * *"
 jobs:
