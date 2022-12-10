@@ -9,7 +9,7 @@ on: [push, pull_request]
    # - cron: "*/5 * * * *"
 jobs:
   build:  
-    name: Run Web App 
+    name: Run Web App using
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
 #     if: (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
