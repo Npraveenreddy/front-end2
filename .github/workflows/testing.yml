@@ -4,7 +4,7 @@ on:
 #   push:
 #     branches: [ "master" ] 
   pull_request:
-#     branches: [ "master" ]  
+    branches: [ "master" ]  
   #schedule:
    # - cron: "*/5 * * * *"
 jobs:
@@ -24,6 +24,8 @@ jobs:
   testing:
     needs: build
     runs-on: ubuntu-latest
+    if: (github.event_name == 'pull-request' || github.ref == 'refs/heads/master')
+
     container:
       image: openjdk:8-jdk-slim
     steps:
@@ -35,9 +37,8 @@ jobs:
     
     needs: build 
     runs-on: ubuntu-latest
-#     if: (github.event_name == 'workflow_dispatch')
     environment: test
-#     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.ref == 'refs/heads/master'}} 
+    if: (github.event_name !== 'pull_request' || github.ref == 'refs/heads/master')
 #     container:
 #       image: openjdk:8-jdk-slim
     steps:
