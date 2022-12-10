@@ -8,7 +8,7 @@ on: [push, pull_request]
   #schedule:
    # - cron: "*/5 * * * *"
 jobs:
-  build:
+  build:  
     name: Run Web App 
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
