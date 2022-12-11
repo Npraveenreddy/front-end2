@@ -24,7 +24,7 @@ jobs:
   testing:
     needs: build
     runs-on: ubuntu-latest
-    if: (github.event_name != 'pull_request' || github.ref == 'refs/heads/master')
+    if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/master')
 
     container:
       image: openjdk:8-jdk-slim
@@ -48,13 +48,3 @@ jobs:
         uses: actions/checkout@v1
       - run: |
           ls -lrt
-  pr:
-    runs-on: ubuntu-latest
-    if: (github.event_name != 'pull_request' || github.ref == 'refs/heads/master')
-
-    container:
-      image: openjdk:8-jdk-slim
-    steps:
-      - name: testing pr to master 
-        uses: actions/checkout@v1
-      - run: echo "how are you"
