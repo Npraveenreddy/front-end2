@@ -12,8 +12,8 @@ jobs:
   build:  
     name: Run Web App using
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/pr')
-    if: (github.event_name == 'workflow_dispatch')
+    if: (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/pr')
+    
     container:
       image: openjdk:8-jdk-slim
     steps:
