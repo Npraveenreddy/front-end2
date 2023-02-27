@@ -2,9 +2,9 @@ name: Deploy
 on: 
   
   push:
-    branches: [ "pr" ] 
+    branches: [pr,master] 
   pull_request:
-    branches: [ "pr" ]  
+    branches: [pr, master ]  
   workflow_dispatch:   
   #schedule:    
    # - cron: "*/5 * * * *"
@@ -12,7 +12,7 @@ jobs:
   build:  
     name: Run Web App using
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/pr')
+    if: (github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/pr' || github.ref == 'refs/heads/master')
     
     container:
       image: openjdk:8-jdk-slim
@@ -25,7 +25,7 @@ jobs:
   testing:
     needs: build
     runs-on: ubuntu-latest
-    if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/pr')
+    if: (github.event_name == 'pull_request' || github.ref == 'refs/heads/pr' || github.ref == 'refs/heads/master')
 
     container:
       image: openjdk:8-jdk-slim
