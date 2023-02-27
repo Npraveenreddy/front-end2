@@ -4,7 +4,8 @@ on:
   push:
     branches: [ "pr" ] 
   pull_request:
-    branches: [ "pr" ]     
+    branches: [ "pr" ]  
+  workflow_dispatch:   
   #schedule:    
    # - cron: "*/5 * * * *"
 jobs:  
