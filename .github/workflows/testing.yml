@@ -20,8 +20,9 @@ jobs:
       - name: Echo
         
         uses: actions/checkout@v1
-      - run: echo "hello"
-      
+      - run: |
+          chmod 777 test.sh
+          /bin/bash test.sh
   testing:
     needs: build
     runs-on: ubuntu-latest
